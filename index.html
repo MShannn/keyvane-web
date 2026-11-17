@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-GB">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -24,21 +24,94 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https: data: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Keyvane - your cloud, your keys">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keyvane Web Vault – open your encrypted password vault in any browser</title>
+  <meta name="description" content="Open your Keyvane vault from any computer, with nothing to install. Logins, API keys and 2FA codes for client work, end-to-end encrypted and decrypted only in your browser. Free web companion to the Keyvane apps.">
+  <link rel="canonical" href="https://vault.techhigh.co.uk/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0E0B1F">
+  <meta name="application-name" content="Keyvane">
+
+  <!-- Social previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Keyvane by TechHigh">
+  <meta property="og:title" content="Keyvane Web Vault">
+  <meta property="og:description" content="Your encrypted password vault in any browser. Nothing to install, decrypted only on your device.">
+  <meta property="og:url" content="https://vault.techhigh.co.uk/">
+  <meta property="og:image" content="https://vault.techhigh.co.uk/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="586">
+  <meta property="og:locale" content="en_GB">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Keyvane Web Vault">
+  <meta name="twitter:description" content="Your encrypted password vault in any browser. Nothing to install, decrypted only on your device.">
+  <meta name="twitter:image" content="https://vault.techhigh.co.uk/og.jpg">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="keyvane">
+  <meta name="apple-mobile-web-app-title" content="Keyvane">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>Keyvane</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Keyvane Web Vault",
+    "alternateName": "Keyvane",
+    "url": "https://vault.techhigh.co.uk/",
+    "description": "End-to-end encrypted client-account vault for developers, freelancers and agencies. Open your vault in any browser; it is decrypted only on your device.",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires JavaScript and WebAssembly",
+    "image": "https://vault.techhigh.co.uk/og.jpg",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+    "featureList": ["End-to-end encryption (Argon2id, XChaCha20-Poly1305)", "Clients, projects and environments", "Built-in 2FA codes", "Google Drive, Dropbox and OneDrive storage", "Works offline"],
+    "sameAs": ["https://techhigh.co.uk/keyvane/"],
+    "publisher": { "@type": "Organization", "name": "TechHigh", "url": "https://techhigh.co.uk/" }
+  }
+  </script>
+
+  <style>
+    html, body { margin: 0; background: #0E0B1F; }
+    #kv-splash { position: fixed; inset: 0; overflow: auto; display: flex; align-items: center; justify-content: center;
+      padding: 24px; box-sizing: border-box; color: #ECEBFF; text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(600px 300px at 50% 0%, rgba(99,102,241,.25), transparent 70%), #0E0B1F; }
+    #kv-splash .inner { max-width: 560px; }
+    #kv-splash img { width: 72px; height: 72px; border-radius: 18px; }
+    #kv-splash h1 { font-size: 1.6rem; margin: 16px 0 8px; letter-spacing: -.01em; }
+    #kv-splash p { color: #A9A5CF; line-height: 1.55; margin: 0 0 12px; }
+    #kv-splash ul { list-style: none; padding: 0; margin: 12px 0; color: #A9A5CF; font-size: .92rem; }
+    #kv-splash li { margin: 4px 0; }
+    #kv-splash a { color: #A5A7FF; }
+    #kv-splash .loading { margin-top: 18px; font-size: .9rem; color: #22D3EE; }
+    #kv-splash .bar { width: 160px; height: 3px; margin: 10px auto 0; border-radius: 3px; overflow: hidden; background: #211B3F; }
+    #kv-splash .bar::after { content: ""; display: block; width: 40%; height: 100%; background: linear-gradient(90deg,#6366F1,#06B6D4);
+      animation: kv-load 1.2s ease-in-out infinite; }
+    @keyframes kv-load { 0% { transform: translateX(-100%); } 100% { transform: translateX(260%); } }
+    @media (prefers-reduced-motion: reduce) { #kv-splash .bar::after { animation: none; width: 100%; } }
+  </style>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <main id="kv-splash" aria-busy="true">
+    <div class="inner">
+      <img src="icons/Icon-192.png" alt="Keyvane" width="72" height="72">
+      <h1>Keyvane Web Vault</h1>
+      <p>Open your encrypted Keyvane vault from any computer, with nothing to install. Your vault is decrypted only in this browser: TechHigh never receives your passwords, master password or Secret Key.</p>
+      <ul>
+        <li>Logins, API keys and 2FA codes, organised by client, project and environment</li>
+        <li>Open a vault from Google Drive, Dropbox, OneDrive or a file on this computer</li>
+        <li>Argon2id and XChaCha20-Poly1305 end-to-end encryption</li>
+      </ul>
+      <p>Free web companion to the Keyvane apps for iPhone, iPad, Mac and Android. <a href="https://techhigh.co.uk/keyvane/">About Keyvane</a> · <a href="https://techhigh.co.uk/keyvane/security.html">Security</a> · <a href="https://techhigh.co.uk/keyvane/privacy.html">Privacy</a></p>
+      <noscript><p><strong>Keyvane needs JavaScript and WebAssembly to open your vault.</strong></p></noscript>
+      <div class="loading" role="status">Loading the vault…<div class="bar"></div></div>
+    </div>
+  </main>
+  <script src="splash.js"></script>
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader

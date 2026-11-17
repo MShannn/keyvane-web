@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#0E0B1F",
     "theme_color": "#6366F1",
-    "description": "Keyvane - your cloud, your keys",
+    "description": "Keyvane web vault: your end-to-end encrypted password vault in any browser.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
